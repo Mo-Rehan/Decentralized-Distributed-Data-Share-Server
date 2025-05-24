@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Decentralized Data Sharing System</title>
+    <!-- <link rel="stylesheet" href="/static/styles.css"> -->
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js"></script>
+    <style>
+        /* General Reset */
+        body, h1, p, a, h2 {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            background: #000000; /* Black background */
+        }
+
+        /* Canvas Background */
+        #webCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Slightly darker overlay */
+            z-index: 1;
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Header Styling */
+        header h1 {
+            font-size: 3rem;
+            color: #04024c;
+            text-shadow: 0 0 10px #000808, 0 0 30px #00bcd4;
+            /* animation: glow 5s infinite ease-in-out; */
+            margin: 6%;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #04024c;
+            padding: 0.7rem 2rem;
+            border: 1px solid #3281ae;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease-in-out;
+            /* background: transparent;  */
+        }
+
+        nav a:hover {
+            background: #00e5ff;
+            color: #000;
+            box-shadow: 0 0 10px #00e5ff;
+        }
+
+        /* Content Styling */
+        .content p {
+            font-family: "Georgia", serif;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            line-height: 2;
+            color: #cccccc;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Us Section */
+        .about-us {
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-us h2 {
+            font-size: 2.5rem;
+            color: #00e5ff;
+            text-shadow: 0 0 10px #00e5ff, 0 0 20px #00bcd4;
+        }
+
+        .developer-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .developer-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00e5ff;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            width: 250px;
+        }
+
+        .developer-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid #00e5ff;
+        }
+
+        .developer-card h3 {
+            font-size: 1.5rem;
+            color: #00e5ff;
+        }
+
+        .developer-card p {
+            font-size: 1rem;
+            color: #cccccc;
+        }
+
+        /* Animation */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px #000000, 0 0 20px #00bcd4, 0 0 30px #00e5ff;
+            }
+            50% {
+                text-shadow: 0 0 20px #000000, 0 0 40px #00bcd4, 0 0 50px #00e5ff;
+            }
+            100% {
+                text-shadow: 0 0 10px #00e5ff, 0 0 20px #00bcd4, 0 0 30px #00e5ff;
+            }
+        }
+        *{
+  box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000000; /* Optional background for contrast */
+}
+
+/* Row container */
+.row {
+    margin-top: 3%;
+  display: flex; /* Flexbox to arrange cards side by side */
+  gap: 30px; /* Space between cards */
+  padding: 20px;
+  justify-content: center; /* Center-align cards */
+  flex-wrap: wrap; /* Ensure cards wrap on smaller screens */
+}
+
+/* Each column (card container) */
+.column {
+  flex: 1; /* Each card takes equal space */
+  max-width: 40%; /* Increased maximum width for wider cards */
+  min-width: 350px; /* Set a minimum width for smaller screens */
+  box-sizing: border-box;
+}
+
+/* Card styles */
+.card {
+  background-color: #fafafa;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 6px 6px rgba(0, 0, 0, 0.22); /* Enhanced shadow for elevation */
+  border-radius: 15px; /* Rounded corners */
+  padding: 40px;
+  height: 200px; /* Fixed height for horizontal rectangles */
+  display: flex; /* Flexbox for centering content */
+  justify-content: left;
+  align-items: center;
+  margin: 5%;
+  color: #04024c;
+  font-size: 23px;
+  font-family: "Roboto Mono", monospace; /* Boxy font */
+  font-weight: bold; /* Bold text */
+  /* transition: box-shadow 0.3s ease-in-out; Smooth shadow transition for hover effects */
+}
+
+.card:hover {
+  box-shadow: 0 15px 30px rgb(250, 250, 250), 0 10px 10px rgba(0, 0, 0, 0.22); /* More pronounced shadow on hover */
+} 
+/* Responsive design */
+@media screen and (max-width: 900px) {
+  .row {
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;
+  }
+  .column {
+    max-width: 100%; /* Cards take full width */
+  }
+}
+
+
+
+    </style>
+</head>
+<body >
+    <!-- Canvas Background -->
+    <canvas id="webCanvas"></canvas>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header>
+            <h1 style="font-size: 3rem;
+            color: #d5d4de;
+            text-shadow: 0 0 10px #00fdfd, 0 0 30px #12018f;
+            margin: 6%;">Distributed Decentralized Data Sharing System</h1>
+            <nav>
+                <a href="/index">Home</a>
+                <a href="/upload">Upload File</a>
+                <a href="/register_peer">Register Peer</a>
+                <a href="/request_file">Request File</a>
+                <a href="/view_routing_table">View Routing Table</a>
+            </nav>
+        </header>
+        
+    </div>
+     
+    <div class="row" >
+        <div class="column">
+          <div class="card">
+            <p>We built a distributed system to handle failure, but now the failures are distributed too!</p>
+          </div>
+        </div>
+      
+        <div class="column">
+          <div class="card">
+            <p>Decentralized file sharing: where your data lives everywhere and nowhere at the same time.</p>
+          </div>
+        </div>
+        
+        <div class="column">
+          <div class="card">
+            <p>Files, scattered globally, yet still one click away.</p>
+          </div>
+        </div>
+</body>
+</html>

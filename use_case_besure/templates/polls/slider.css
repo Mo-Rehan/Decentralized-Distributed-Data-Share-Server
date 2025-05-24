@@ -1,0 +1,249 @@
+/* body{
+  overflow: hidden;
+} */
+/* .bannerl ,.banner2 ,.banner3,.banner4{
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  }
+img{
+    width: 120%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    animation: zoom-out 5s linear infinite;
+}
+@keyframes zoom-out{
+  100%{
+    width: 100%;
+  }
+}
+.text-box{
+  width: 600px;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  color: #fff;
+  animation: textup 20s linear infinite;
+  transform: translateY(100px);
+}
+@keyframes textup{
+  10%{
+    transform: translateY(0px);
+
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+.text-box h1{
+    margin-bottom: 40px;
+  }
+  .text-box p{
+    font-size: 14px;
+    line-height:18px;
+    margin-top: 80px;
+    }
+    .text-box span{
+    background: red;
+    height: 1px;
+    width: 100px;
+    position: absolute;
+    left: 0;
+    }
+    .bannerl{
+      animation: slidel 20s linear infinite;
+      }
+      .banner2{
+      animation: slide2 20s linear infinite;
+      }
+      .banner3{
+      animation: slide3 20s linear infinite;
+      }
+      .banner4{
+      animation: slide4 20s linear infinite;
+      }
+      @keyframes slidel{
+        0%{
+        visibility: visible;}
+        25%{
+        visibility: hidden;}
+        50%{
+        visibility: hidden;
+        }
+        75%{
+        visibility: hidden;
+        }
+        100%{
+          visibility: visible;
+          }
+      }
+      @keyframes slide2{
+        0%{
+        visibility: hidden;}
+        25%{
+        visibility: hidden;}
+        50%{
+        visibility: visible;
+        }
+        75%{
+        visibility: hidden;
+        }
+        100%{
+          visibility: hidden;
+          }
+      }
+      @keyframes slide3{
+        0%{
+        visibility: hidden;}
+        25%{
+        visibility: hidden;}
+        50%{
+        visibility: hidden;
+        }
+        75%{
+        visibility: visible;
+        }
+        100%{
+          visibility: hidden;
+          }
+      }
+      @keyframes slide4{
+        0%{
+        visibility: hidden;}
+        25%{
+        visibility: hidden;}
+        50%{
+        visibility: hidden;
+        }
+        75%{
+        visibility: hidden;
+        }
+        100%{
+          visibility: visible;
+          }
+      }
+      .text-box1{
+        animation-delay: 0s;
+      }
+      .text-box2{
+        animation-delay: 5s;
+      }
+      .text-box3{
+        animation-delay: 10s;
+      }
+      .text-box4{
+        animation-delay: 15s;
+      }
+       */
+
+       .slider{
+        width: 100%;
+        height: 800px;
+        /* border-radius: 10px; */
+        overflow: hidden;
+      }
+      
+      .slides{
+        width: 500%;
+        height: 500px;
+        display: flex;
+      }
+      
+      .slides input{
+        display: none;
+      }
+      
+      .slide{
+        width: 20%;
+        transition: 2s;
+      }
+      
+      .slide img{
+        width: 100%;
+        height: 800px;
+      }
+      
+      /*css for manual slide navigation*/
+      
+      .navigation-manual{
+        position: absolute;
+        width: 800px;
+        margin-top: 250px;
+        margin-left: 370px;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .manual-btn{
+        border: 2px solid #FFB320;
+        padding: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 1s;
+      }
+      
+      .manual-btn:not(:last-child){
+        margin-right: 40px;
+      }
+      
+      .manual-btn:hover{
+        background: #FFB320;
+      }
+      
+      #radio1:checked ~ .first{
+        margin-left: 0;
+      }
+      
+      #radio2:checked ~ .first{
+        margin-left: -20%;
+      }
+      
+      #radio3:checked ~ .first{
+        margin-left: -40%;
+      }
+      
+      #radio4:checked ~ .first{
+        margin-left: -60%;
+      }
+      
+      /*css for automatic navigation*/
+      
+      .navigation-auto{
+        position: absolute;
+        display: flex;
+        width: 800px;
+        justify-content: center;
+        margin-top: 750px;
+        margin-left: 370px;
+      }
+      
+      .navigation-auto div{
+        border: 2px solid #FFB320;
+        padding: 5px;
+        border-radius: 10px;
+        transition: 1s;
+      }
+      
+      .navigation-auto div:not(:last-child){
+        margin-right: 40px;
+      }
+      
+      #radio1:checked ~ .navigation-auto .auto-btn1{
+        background: #FFB320;
+      }
+      
+      #radio2:checked ~ .navigation-auto .auto-btn2{
+        background: #FFB320;
+      }
+      
+      #radio3:checked ~ .navigation-auto .auto-btn3{
+        background: #FFB320;
+      }
+      
+      #radio4:checked ~ .navigation-auto .auto-btn4{
+        background: #FFB320;
+      }

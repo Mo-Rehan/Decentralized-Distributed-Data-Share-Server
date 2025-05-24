@@ -1,0 +1,72 @@
+{% extends 'polls/base.html' %} {% block title %}<title>Contact</title>
+{% endblock %} {% block contents %}
+<style>
+  .width-border {
+    border-radius: 12px;
+    border: 1px solid #d9534f;
+    display: flex;
+  }
+  .containers {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+</style>
+
+<div class="containers">
+  <div class="p-5">
+    <div class="shadow-lg w-75 p-5 mb-3 bg-white round width-border mx-auto">
+      <form action="" method="post">
+        <h2 class="text-center text-danger text-uppercase">Contact Us</h2>
+        <br /><br />
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="p-3">
+              <div class="row">
+                <div class="col-2">
+                  <i class="fas fa-user" style="font-size: 20px"></i>
+                </div>
+                <div class="col-10">
+                  <p style="font-size: 17px">Prateek Sharma</p>
+                  <p style="font-size: 17px">Junaid Khan</p>
+                  <p style="font-size: 17px">Rehan Deshnoor</p>
+                  <p style="font-size: 17px">Darshit Verma</p>
+                </div>
+                <br /><br />
+                <div class="col-2">
+                  <i class="fas fa-phone" style="font-size: 20px"></i>
+                </div>
+                <div class="col-10">
+                  <p style="font-size: 17px">+91XXXXXXXX</p>
+                </div>
+                <br /><br />
+                <div class="col-2">
+                  <i class="fas fa-envelope" style="font-size: 20px"></i>
+                </div>
+                <div class="col-10">
+                  <p style="font-size: 17px">XXXX@gmail.com</p>
+                </div>
+                <br /><br />
+                <div class="col-2">
+                  <i class="fas fa-map-marker-alt" style="font-size: 20px"></i>
+                </div>
+                <div class="col-10">
+                  <p style="font-size: 17px">XXXXXXXX</p>
+                </div>
+                <br /><br />
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            {% csrf_token %} {{forms.as_p}}
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

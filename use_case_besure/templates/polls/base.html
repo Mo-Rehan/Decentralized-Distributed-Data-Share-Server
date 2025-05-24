@@ -1,0 +1,252 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="{% static 'css/all.min.css' %}" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{% static 'images/title.jpg' %}"
+    />
+
+    {% block title %}
+    <title>Home</title>
+    {% endblock %}
+  </head>
+  <style>
+    .bg-danger:hover {
+      background-color: white;
+      color: #d9534f;
+    }
+
+    .nav :hover {
+      color: white;
+      background-color: #d9534f;
+      border-radius: 6px;
+    }
+
+    .nav-link {
+      color: #d9534f;
+      border: 1.5px solid #d9534f;
+      border-radius: 6px;
+      margin-left: 8px;
+    }
+
+    .carousel-item {
+      height: 71.8vh;
+      min-height: 200px;
+      background: no-repeat scroll center scroll;
+      background-size: cover;
+    }
+
+    .carousel-item::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: #000;
+      opacity: 0.5;
+    }
+
+    .carousel-caption {
+      bottom: 100px;
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+
+    .carousel-caption h5 {
+      font-size: 50px;
+      font-weight: 600;
+    }
+
+    .carousel-caption p {
+      font-size: 25px;
+      top: 2rem;
+    }
+
+    footer p {
+      color: white;
+    }
+
+    footer p a {
+      color: #fc7b19;
+      text-decoration: none;
+    }
+
+    footer p a:hover {
+      color: white;
+    }
+  </style>
+
+  <body>
+    <div class="container-fluid bg-danger">
+      <div class="p-4">
+        <div class="text-center text-white fs-2">BeSure (Blood Exchange System for Urgent Relief and Emergencies)</div>
+      </div>
+    </div>
+    <div class="container-fluid border">
+      <nav class="navbar bg-white">
+        <a class="navbar-brand" href="#">
+          <img
+            src="{% static 'images/logo.png' %}"
+            width="80"
+            height="80"
+            alt=""
+          />
+        </a>
+
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'donor_registration' %}"
+              >Donor Registration</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'search' %}">Search</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link"
+              href="/admin/login/?next=/admin/"
+              data-toggle="dropdown"
+            >
+              Admin
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    {% block contents %}
+
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="{% static 'images/slide1.jpg' %}"
+            class="d-block w-100 h-100"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Just Donate Blood</h5>
+            <p>
+              “Donate Blood Because You Never Know How Helpful It Might Be To
+              Someone.”
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="{% static 'images/slide2.jpg' %}"
+            class="d-block w-100 h-100"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Just Donate Blood</h5>
+            <p>
+              “Blood Donation Is A Small Act Of Kindness That Does Great And Big
+              Wonders.”
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="{% static 'images/slide3.jpg' %}"
+            class="d-block w-100 h-100"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Just Donate Blood</h5>
+            <p>
+              “Blood Donation Costs You Nothing, But It Can Mean The World To
+              Someone In Need.”
+            </p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    {% endblock %}
+    <footer class="p-2 text-center bg-danger">
+      <p class="mt-3">
+        Created By
+        <a href="simranlotey.github.io">Prateek Sharma & Team </a>
+      </p>
+
+      <p></p>
+    </footer>
+
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Peer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <canvas id="webCanvas"></canvas>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Register Peer</h1>
+        <nav>
+            <a href="/index">Home</a>
+            <a href="/upload">Upload File</a>
+            <a href="/register_peer">Register Peer</a>
+            <a href="/request_file">Request File</a>
+            <a href="/view_routing_table">View Routing Table</a>
+        </nav>
+        <div class="content">
+            <form id="peerForm">
+                <label for="peerIp">Peer IP:</label>
+                <input type="text" id="peerIp" name="peerIp" placeholder="Enter peer IP" required>
+                <label for="peerPort">Peer Port:</label>
+                <input type="text" id="peerPort" name="peerPort" placeholder="Enter peer port" required>
+                <button type="submit">Register</button>
+            </form>
+            <p id="peerStatus"></p>
+        </div>
+    </div>
+</body>
+</html>

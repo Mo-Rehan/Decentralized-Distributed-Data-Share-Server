@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 001</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1d1d1d, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: backgroundShift 10s infinite;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+        .team-name,
+        .member,
+        .tagline,
+        a {
+            display: none;
+            /* Hidden initially */
+            animation: fadeIn 2s ease forwards;
+        }
+
+        .team-name {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ff007f;
+            background: linear-gradient(90deg, #ff007f, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 0px 15px rgba(255, 0, 127, 0.8);
+            animation-delay: 1s;
+        }
+
+        .member {
+            font-size: 2.5rem;
+            color: #ffffff;
+            text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6);
+            margin-top: 20px;
+        }
+
+        .member:nth-child(2) {
+            animation-delay: 3s;
+        }
+
+        .member:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .member:nth-child(4) {
+            animation-delay: 5s;
+        }
+
+        .member:nth-child(5) {
+            animation-delay: 6s;
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            color: #0df5e3;
+            text-shadow: 0px 0px 12px rgba(13, 245, 227, 0.7);
+            font-style: italic;
+            margin-top: 30px;
+            animation-delay: 7s;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            background: linear-gradient(90deg, #ff007f, #00f0ff);
+            text-decoration: none;
+            border-radius: 50px;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
+        }
+
+        a:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0px 0px 15px rgba(255, 0, 127, 0.8);
+            }
+
+            100% {
+                box-shadow: 0px 0px 30px rgba(0, 240, 255, 1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Video with audio enabled -->
+    <video id="video" autoplay>
+        <source src="{{ url_for('static', filename='vid.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <!-- Team Name -->
+        <div class="team-name">Team 001 With</div>
+        <!-- Team Members -->
+        <div class="member">Prateek Sharma</div>
+        <div class="member">Junaid Khan</div>
+        <div class="member">Rehan Deshnoor &</div>
+        <div class="member">Darshit Verma</div>
+        <!-- Tagline -->
+        <div class="tagline">Let's dive into this world</div>
+        <!-- Anchor Tag -->
+        <a href="#" id="exploreLink" target="_blank">Click to explore distributed sharing</a>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const elements = document.querySelectorAll('.team-name, .member, .tagline, a');
+        const exploreLink = document.querySelector('#exploreLink');
+        
+        // Hide the 'Click to explore' button initially
+        exploreLink.style.display = 'none';
+
+        // Function to start the video and play with sound
+        function playVideo() {
+            video.play();
+        }
+
+        // Show elements in sequence after the video ends
+        video.addEventListener('ended', () => {
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.display = 'block';
+                }, index * 1000); // Adjust delay for each element
+            });
+            // Show the 'Click to explore' button after all animations
+            setTimeout(() => {
+                exploreLink.style.display = 'inline-block';
+            }, elements.length * 1000);
+        });
+
+        // Add a button to play video with sound
+        const playButton = document.createElement('button');
+        playButton.innerText = 'Plug Into the Peerverse';
+        playButton.style.padding = '15px 30px';
+        playButton.style.fontSize = '1.5rem';
+        playButton.style.cursor = 'pointer';
+        playButton.style.position = 'absolute';
+        playButton.style.top = '50%';
+        playButton.style.left = '50%';
+        playButton.style.transform = 'translate(-50%, -50%)';
+        playButton.style.backgroundColor = '#ff007f';
+        playButton.style.border = 'none';
+        playButton.style.borderRadius = '10px';
+        playButton.style.color = 'white';
+        playButton.style.boxShadow = '0px 0px 15px rgba(255, 0, 127, 0.8)';
+        document.body.appendChild(playButton);
+
+        // Start the video when the button is clicked
+        playButton.addEventListener('click', () => {
+            playVideo();
+            playButton.style.display = 'none'; // Hide the play button after clicking
+        });
+
+        // Dynamically set the link based on the current URL (IP and Port)
+        const currentHost = window.location.hostname;  // Gets the IP or domain name
+        const currentPort = window.location.port;  // Gets the port number
+        exploreLink.href = `http://${currentHost}:${currentPort}/index`;  // Set the dynamic URL
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About Us Card</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .about {
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 700px;
+            background-color: #f49f9d ;
+      
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .about img {
+            width: 120px;
+            height: auto;
+            border-radius: 50%;
+            border: 0px;
+            
+        }
+
+        .about h1 {
+            font-size: 60px;
+            margin: 20px 0;
+            color: #000000;
+        }
+
+        .about p {
+            
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .about button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .about button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Image Slider */
+        .slider-container {
+            position: relative;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        #image-slider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #image-slider .slide {
+            position: relative;
+            display: none;
+            width: 33.33%; /* One-third of the page width */
+            height: 300px; /* Proportional height */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        #image-slider .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #image-slider .slide.active {
+            display: block;
+        }
+
+        #image-slider .slide .name {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        #image-slider .slide .name {
+            position: absolute;
+            top: 10px; /* Adjust this to control vertical placement */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7); /* Optional: Add background for better visibility */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav button {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            background-color: white;
+            border: 2px solid #555;
+            border-radius: 50%;
+            padding: 12px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav button:hover {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- About Us Section -->
+    <section class="about">
+        <img src="logo.jpeg" alt="Logo">
+        <h1>About Us</h1>
+        <p>Cyphervoting is an online voting website based on blockchain technology. This technology is a beautiful replacement for traditional electronic voting solutions with distributed, non-repudiation, and security protection characteristics. It has great potential to decrease organizational costs and increase voter turnout. It eliminates the need to print ballot papers or open polling stations-voters can vote from wherever there is an Internet connection.</p>
+        <button type="button">Contact Us</button>
+    </section>
+
+    <!-- Image Slider Section -->
+    <div class="slider-container">
+        <div id="image-slider">
+            <div class="slide active">
+                <div class="name">Darshit</div>
+                <img src="darshit.jpeg" alt="Darshit">
+            </div>
+            <div class="slide">
+                <div class="name">Junaid</div>
+                <img src="junaid.jpeg" alt="Junaid">
+            </div>
+            <div class="slide">
+                <div class="name">Prateek</div>
+                <img src="prateek.jpeg" alt="Prateek">
+            </div>
+            <div class="slide">
+                <div class="name">Rehan</div>
+                <img src="rehan.jpeg" alt="Rehan">
+            </div>
+        </div>
+
+        <div class="nav">
+            <button id="prev"><i class="fa fa-arrow-left"></i></button>
+            <button id="next"><i class="fa fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('#image-slider .slide');
+        let currentIndex = 0;
+
+        // Function to update active slide
+        function updateActiveSlide(index) {
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === index);
+            });
+        }
+
+        // Previous Button Click
+        document.getElementById('prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateActiveSlide(currentIndex);
+        });
+
+        // Next Button Click
+        document.getElementById('next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateActiveSlide(currentIndex);
+        });
+    </script>
+</body>
+
+</html>

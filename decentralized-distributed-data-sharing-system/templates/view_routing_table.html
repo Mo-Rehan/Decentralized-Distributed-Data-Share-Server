@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Routing Table</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <canvas id="webCanvas"></canvas>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Routing Table</h1>
+        <nav>
+            <a href="/index">Home</a>
+            <a href="/upload">Upload File</a>
+            <a href="/register_peer">Register Peer</a>
+            <a href="/request_file">Request File</a>
+            <a href="/view_routing_table">View Routing Table</a>
+        </nav>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Node</th>
+                        <th>Files</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for node, info in routing_table.items() %}
+                    <tr>
+                        <td>{{ node }}</td>
+                        <td>{{ info.files | join(", ") }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
