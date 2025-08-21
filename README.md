@@ -1,124 +1,183 @@
-Peer-to-Peer File Sharing Network
-A distributed file-sharing system built using Flask that enables nodes to:
+📂 P2P File Sharing System (Flask-based)
 
-Upload and share files
+This project implements a peer-to-peer (P2P) file-sharing network using Flask as the backend framework.
+Each node in the network runs as a Flask server, can upload, announce, request, replicate, and download files, and maintains a routing table of peers and their available files.
 
-Discover files across peers
+The system supports:
 
-Maintain decentralized routing tables via a gossip protocol
+File upload & replication across peers
 
-Ensure availability through file replication
+Peer registration & routing table exchange
 
-Detect and handle peer failures with periodic ping checks
+File request & distributed downloading
 
-This project demonstrates core principles of decentralized networking, fault tolerance, and peer coordination.
+Heartbeat monitoring to remove unreachable nodes
 
-📌 Features
-✅ Decentralized Peer Discovery — No central server required
+🚀 Features
+1. Peer-to-Peer Networking
 
-🔄 Gossip Protocol — Periodic exchange of routing data among peers
+Each node is a server (IP:Port) that connects with peers at startup or runtime.
 
-🧩 File Replication — Redundant storage for high availability
+Nodes share files and metadata with each other.
 
-🔍 File Request & Retrieval — Seamless file lookup across the network
+2. File Management
 
-🧠 Fault Detection — Automatic removal of unresponsive nodes
+Upload Files (/upload) → Add file to local storage & announce to peers.
 
-🌐 Web Interface — User-friendly interaction for file sharing and monitoring
+Download Files (/download_file/<file_name>) → Retrieve file if available locally.
 
-🚀 Getting Started
-🔧 Prerequisites
-Ensure Python 3.7+ is installed.
+Request Files (/request_file) → Search network for file availability & download from peers.
 
-Install dependencies:
+Replication → Files are replicated to at least one peer for redundancy.
 
-bash
-Copy
-Edit
+3. Peer Discovery & Routing
+
+Register Peer (/register_peer) → Share routing tables, merge knowledge of the network.
+
+Announce Peer (/announce_peer) → Notify others about a new peer & its files.
+
+Routing Table (/get_routing_table, /view_routing_table) → Maintains live map of peers, files, and last-seen timestamps.
+
+4. Health Monitoring
+
+Heartbeat/Ping (/ping) → Check peer availability.
+
+Ping Thread → Periodically pings all known peers. If a peer is unresponsive for 30+ seconds, it is removed from the routing table.
+
+5. Web Interface
+
+Basic HTML templates for:
+
+Upload files (upload.html)
+
+Request files (request_file.html)
+
+View routing table (view_routing_table.html)
+
+Landing & Index pages (landing.html, index.html)
+
+⚙️ Installation & Setup
+1. Clone the repository
+git clone https://github.com/yourusername/p2p-file-sharing.git
+cd p2p-file-sharing
+
+2. Install dependencies
 pip install flask requests
 
-Running the Application
-🖥️ On a Single Machine (Simulated Network)
-Use different ports to simulate multiple nodes:
+3. Run a node
+python app.py --ip 127.0.0.1 --port 5000 --peers 127.0.0.1:5001 127.0.0.1:5002
 
-bash
-Copy
-Edit
-# Terminal 1 (Node A)
-python app.py --port 5000
 
-# Terminal 2 (Node B)
-python app.py --port 5001 --peers 127.0.0.1:5000
+Arguments:
 
-# Terminal 3 (Node C)
-python app.py --port 5002 --peers 127.0.0.1:5000 127.0.0.1:5001
-🌐 On a Local Network (Different Machines)
-Ensure all machines are connected to the same LAN and firewalls allow communication.
+--ip → IP address to bind (default 127.0.0.1)
 
-Step 1: Get Local IPs
-Use ipconfig (Windows) or ifconfig/ip a (Linux/macOS) to find each machine’s IP.
+--port → Port number (default 5000)
 
-Step 2: Start Nodes
-On Machine A:
+--peers → Space-separated list of peer addresses (IP:Port)
 
-bash
-Copy
-Edit
-python app.py --ip 192.168.1.10 --port 5000
-On Machine B:
+Example:
 
-bash
-Copy
-Edit
-python app.py --ip 192.168.1.11 --port 5001 --peers 192.168.1.10:5000
-On Machine C:
+python app.py --ip 127.0.0.1 --port 5001 --peers 127.0.0.1:5000
 
-bash
-Copy
-Edit
-python app.py --ip 192.168.1.12 --port 5002 --peers 192.168.1.10:5000 192.168.1.11:5001
-Ensure that the IPs are accessible by pinging across machines.
+🛠️ API Endpoints
+File Operations
 
-🌐 Web Interface
-Once the app is running, open in a browser:
+POST /upload → Upload and announce a file
 
-php-template
-Copy
-Edit
-http://<node-ip>:<port>
-🔹 Available Pages
-Route	Description
-/ or /index	Landing page
-/upload	Upload and replicate a file
-/request_file	Request a file from the network
-/register_peer	Register a new peer manually
-/view_routing_table	View the known peers and their files
+GET /download_file/<file_name> → Download file if available locally
 
-🛠️ How It Works
-📡 Gossip Protocol
-Nodes periodically exchange routing tables to learn about new peers and files.
+POST /request_file → Search and download file from peers
 
-🔁 File Replication
-Each file is replicated to other nodes (replication_factor = 2 by default) to ensure durability.
+Peer Operations
 
-🧠 Health Checks
-Each node pings peers every 10 seconds. Unreachable nodes (for 30+ seconds) are automatically removed.
+POST /register_peer → Register a peer & exchange routing tables
 
-⚙️ Configuration Options
-Argument	Type	Description
---ip	string	IP address to bind (default: 127.0.0.1)
---port	int	Port to run the node on (default: 5000)
---peers	list	List of initial peers in ip:port format
+POST /announce_peer → Announce presence to the network
 
-📦 Future Enhancements
- Docker support for deployment
+GET /get_routing_table → Fetch raw routing table (JSON)
 
- NAT traversal (e.g., STUN/TURN)
+GET /view_routing_table → View routing table in HTML
 
- File search with metadata filters
+Replication & Announcements
 
- Role-based access or authentication
+POST /announce_file → Notify peers about new file
 
- Upload via drag & drop UI
+POST /replicate_file → Accept replicated file from a peer
 
- CLI client integration
+Health Monitoring
+
+GET /ping → Check if node is alive
+
+UI Pages
+
+/ → Landing page
+
+/index → Main index
+
+/upload → Upload page
+
+/request_file → Request file page
+
+/view_routing_table → Routing table page
+
+🔄 Workflow
+
+Node Startup
+
+Node starts Flask server at given IP:Port.
+
+Registers with provided peers (--peers).
+
+Fetches and merges routing tables.
+
+File Upload
+
+User uploads a file → File is hashed & added to local storage.
+
+File announcement sent to peers.
+
+File replicated to at least one peer.
+
+File Request
+
+User requests a file.
+
+Node searches its routing table for peers holding the file.
+
+If found, file is downloaded from available peer.
+
+Peer Monitoring
+
+Background thread pings peers every 10s.
+
+If a peer is unreachable for 30+ seconds, it is removed.
+
+📦 Example Usage
+Start Node 1:
+python app.py --ip 127.0.0.1 --port 5000
+
+Start Node 2 (connect to Node 1):
+python app.py --ip 127.0.0.1 --port 5001 --peers 127.0.0.1:5000
+
+Upload file on Node 1:
+curl -X POST http://127.0.0.1:5000/upload -H "Content-Type: application/json" -d '{"file_name": "sample.txt"}'
+
+Request file on Node 2:
+curl -X POST http://127.0.0.1:5001/request_file -H "Content-Type: application/json" -d '{"file_name": "sample.txt"}'
+
+⚠️ Limitations & Future Improvements
+
+No authentication → Any peer can join.
+
+No chunked file transfer → Large files may be inefficient.
+
+Replication factor fixed to 1 → Can be improved with configurable redundancy.
+
+No DHT (Distributed Hash Table) → Routing is limited to peers’ routing tables.
+
+Files are read/written directly → No dedicated storage directory.
+
+📖 License
+
+MIT License. Free to use and modify.
